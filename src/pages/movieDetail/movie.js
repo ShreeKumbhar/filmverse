@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./movie.css";
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+
 
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
@@ -56,7 +58,7 @@ const MovieDetails = () => {
 
         try {
             const response = await axios.post(
-                "http://localhost:5000/api/favorites",
+                `${API_BASE_URL}/api/favorites`,
                 { movieId: id },  // Send movie ID
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -67,7 +69,7 @@ const MovieDetails = () => {
             const updatedFavorites = isFavorite
                 ? favorites.filter((fav) => fav !== id) // Remove from favorites
                 : [...favorites, id]; // Add to favorites
-            
+
             setFavorites(updatedFavorites);
             localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
         } catch (error) {

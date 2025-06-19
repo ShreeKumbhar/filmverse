@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./profile.css";
 
-const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/auth/`;
+
 
 const Profile = () => {
     const [user, setUser] = useState(null);
@@ -55,7 +56,7 @@ const Profile = () => {
     }, [token]);
 
     const handleLogout = () => {
-        localStorage.removeItem("token"); 
+        localStorage.removeItem("token");
         window.location.reload();
     };
 

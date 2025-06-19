@@ -5,7 +5,6 @@ import { toast, ToastContainer } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import "./LoginSignUpPage.css";
-
 const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
 const LoginSignUpPage = () => {
