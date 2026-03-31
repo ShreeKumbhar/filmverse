@@ -15,3 +15,5 @@ yarn-error.log*
 
 # Editor-specific files
 .vscode/
+
+build/
