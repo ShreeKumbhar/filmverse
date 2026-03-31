@@ -10,30 +10,30 @@ import React, { useEffect, useState } from "react";
      const { type } = useParams();
  
      useEffect(() => {
-         getData();
-     }, [type]); //Fetch data when "type" changes
- 
-     const getData = async () => {
-         setLoading(true);
-         try {
-             const response = await fetch(
-                 `https://api.themoviedb.org/3/movie/${type ? type : "popular"}?api_key=${API_KEY}&language=en-US`
-             );
-             const data = await response.json();
-     
-             if (data.results) {
-                 setMovieList(data.results);
-             } else {
-                 console.error("Invalid API response:", data);
-                 setMovieList([]);
-             }
-         } catch (error) {
-             console.error("Error fetching movie data:", error);
-             setMovieList([]);
-         } finally {
-             setLoading(false);
-         }
-     };
+        const getData = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(
+                    `https://api.themoviedb.org/3/movie/${type ? type : "popular"}?api_key=${API_KEY}&language=en-US`
+                );
+                const data = await response.json();
+
+                if (data.results) {
+                    setMovieList(data.results);
+                } else {
+                    console.error("Invalid API response:", data);
+                    setMovieList([]);
+                }
+            } catch (error) {
+                console.error("Error fetching movie data:", error);
+                setMovieList([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        getData();
+    }, [type]); // Fetch data when "type" changes
 
      return (
         <div className="movie__list">
