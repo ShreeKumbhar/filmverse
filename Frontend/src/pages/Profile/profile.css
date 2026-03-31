@@ -1,0 +1,158 @@
+.profile-container {
+    min-height: 100vh;
+    padding: 32px 6vw 50px;
+    background:
+        radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.06), transparent 36%),
+        linear-gradient(180deg, #101522 0%, #070b14 100%);
+    color: #f0f4ff;
+}
+
+.profile-topbar {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    background: rgba(17, 26, 40, 0.65);
+    backdrop-filter: blur(4px);
+}
+
+.profile-kicker {
+    margin: 0;
+    color: #8ec5ff;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.profile-topbar h1 {
+    margin: 6px 0;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+}
+
+.profile-email {
+    margin: 0;
+    color: #bdd0ec;
+}
+
+.profile-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.refresh-button,
+.logout-button {
+    border: 0;
+    border-radius: 12px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.refresh-button {
+    background: #2f90ff;
+    color: #fff;
+}
+
+.logout-button {
+    background: #ff5f5f;
+    color: #fff;
+}
+
+.refresh-button:hover,
+.logout-button:hover {
+    opacity: 0.92;
+}
+
+.refresh-button:active,
+.logout-button:active {
+    transform: translateY(1px);
+}
+
+.favorites-heading {
+    width: min(1120px, 100%);
+    margin: 26px auto 12px;
+    font-size: 1.3rem;
+}
+
+.favorites-list {
+    width: min(1120px, 100%);
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 18px;
+}
+
+.favorite-movie {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.favorite-movie:hover {
+    transform: translateY(-4px);
+    border-color: rgba(142, 197, 255, 0.55);
+}
+
+.favorite-movie:focus-visible {
+    outline: 2px solid #8ec5ff;
+    outline-offset: 3px;
+}
+
+.favorite-movie img {
+    width: 100%;
+    border-radius: 10px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+
+.favorite-movie h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.35;
+}
+
+.favorite-movie p {
+    margin: 0;
+    color: #b6c4da;
+    font-size: 0.84rem;
+}
+
+.empty-state {
+    margin: 20px 0;
+    color: #bfd0e8;
+}
+
+@media (max-width: 760px) {
+    .profile-container {
+        padding: 20px 16px 40px;
+    }
+
+    .profile-topbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .profile-actions {
+        width: 100%;
+    }
+
+    .refresh-button,
+    .logout-button {
+        flex: 1;
+    }
+}

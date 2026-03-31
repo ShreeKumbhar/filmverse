@@ -1,120 +1,169 @@
-# 🎬 FilmVerse
+# FilmVerse
 
-FilmVerse is a movie exploration platform built with React for the frontend and MongoDB Atlas for the database. Users can browse movies, mark favorites, and see their profiles.
+FilmVerse is a full-stack movie discovery web application where users can explore films, view detailed movie information, create accounts, and manage personal favorites.
 
----
+The project is built with a React frontend and a Node.js/Express backend, with MySQL as the persistence layer and TMDB as the movie data source.
 
-## 🛠 Tech Stack
+## Why This Project Stands Out
 
-- **Frontend:** React, React Router, React-Toastify, React-Responsive-Carousel
-- **Backend:** Node.js, Express.js, MongoDB Atlas
-- **Authentication:** JWT (JSON Web Token)
-- **Styling:** CSS
-- **API:** The Movie Database (TMDB)
+- End-to-end full-stack implementation (frontend, backend, database, authentication)
+- JWT-based protected routes and user-specific favorites
+- External API integration with TMDB for rich movie metadata
+- Responsive UI with improved profile and authentication experiences
 
----
+## Tech Stack
 
-## ⚙️ Installation & Setup
+- Frontend: React, React Router, Axios, React Toastify
+- Backend: Node.js, Express.js
+- Database: MySQL (mysql2)
+- Authentication: JWT + bcryptjs
+- External API: TMDB API
 
-### 1️⃣ Clone the Repository
-```sh
+## Project Structure
+
+```text
+FilmVerse/
+	Backend/    # Express API + MySQL integration
+	Frontend/   # React web application
+	README.md
+```
+
+## Features
+
+- Browse movies by category
+- Open detailed movie pages with synopsis and metadata
+- Sign up and log in with secure password hashing
+- Add movies to favorites
+- View and manage favorites from profile
+- Protected profile route for authenticated users
+
+## Prerequisites
+
+- Node.js 18+
+- npm
+- MySQL 8+
+- TMDB API key
+
+## Setup Instructions
+
+### 1. Clone Repository
+
+```bash
 git clone https://github.com/your-username/FilmVerse.git
 cd FilmVerse
 ```
 
-### 2️⃣ Install Dependencies
+### 2. Create Database
 
-#### 📦 Backend (Node.js, Express, MongoDB)
-```sh
-cd backend
+```sql
+CREATE DATABASE filmverse;
+```
+
+### 3. Configure Environment Variables
+
+Create Backend/.env:
+
+```env
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=your_mysql_password
+MYSQL_DATABASE=filmverse
+JWT_SECRET=your_jwt_secret
+TMDB_API_KEY=your_tmdb_api_key
+PORT=5001
+```
+
+Create Frontend/.env:
+
+```env
+REACT_APP_TMDB_API_KEY=your_tmdb_api_key
+REACT_APP_BACKEND_URL=http://localhost:5001
+```
+
+Note: Backend/.env.example is included as a reference template.
+
+### 4. Install Dependencies
+
+Install backend dependencies:
+
+```bash
+cd Backend
 npm install
 ```
 
-#### 🎨 Frontend (React)
-```sh
-cd ..
+Install frontend dependencies:
+
+```bash
+cd ../Frontend
 npm install
 ```
 
----
+## Run the Application
 
-## 🔑 Environment Variables
-Set up environment variables for both frontend and backend.
+Use two terminals.
 
-### 📁 Backend: `backend/.env`
-Create a `.env` file inside the `backend/` directory and add:
-```env
-MONGO_URI=DATABASE_CONNECTION_STRING
-JWT_SECRET=YOUR_SECRET_KEY
-TMDB_API_KEY=YOUR_TMDB_API_KEY
-```
+Start backend:
 
-### 📁 Frontend: `.env`
-Create a `.env` file in the root directory (`FilmVerse/`) and add:
-```env
-REACT_APP_TMDB_API_KEY=YOUR_TMDB_API_KEY
-```
-
----
-
-## 📌 Running the Project
-
-### ▶️ Start Frontend Server
-```sh
-npm start
-```
-
-### ▶️ Start Backend Server
-```sh
-cd backend
+```bash
+cd Backend
 node server.js
 ```
 
----
+Start frontend:
 
-## 📚 Installed Dependencies
+```bash
+cd Frontend
+npm start
+```
 
-### ✅ Backend
-- Express
-- Mongoose
-- dotenv
-- jsonwebtoken
-- bcryptjs
-- cors
-- nodemon
-- Install them with : npm install react-router-dom axios react-toastify react-icons react-responsive-carousel
- 
-### ✅ Frontend
-- React
-- React Router
-- Axios
-- React Toastify
-- React Responsive Carousel
-- FontAwesome
-- Install them with : npm install react-router-dom axios react-toastify react-icons react-responsive-carousel
+## Default Local URLs
 
+- Frontend: http://localhost:3000
+- Backend: http://localhost:5001
+- Health Check: http://localhost:5001/api/health
 
----
+## Key API Endpoints
 
-## 🎯 Features
-✅ Browse **popular, top-rated, and upcoming** movies  
-✅ View **movie details** including title, overview, and rating  
-✅ **User authentication** (Login, Logout)  
-✅ **Save favorite movies** to profile  
-✅ **Secure API** with JWT authentication  
-✅ **View movie trailers** directly in the app  
-✅ **See the list of actors** in each movie  
+- POST /api/auth/signup
+- POST /api/auth/login
+- POST /api/auth/favorites
+- POST /api/auth/reset-password
+- GET /api/profile/user
+- GET /api/health
 
----
+## Verify Data is Stored in MySQL
 
-## 🎥 Demo Video
-[![Watch the Demo](https://img.shields.io/badge/Watch%20Demo-Click%20Here-blue?style=for-the-badge)](https://drive.google.com/file/d/1bydNfWhQvzscf07RgFR6wQSjOf6FJIKP/view?usp=drive_link)
+After signing up and adding favorites in the app, run:
 
-## 📜 License
+```sql
+USE filmverse;
+SHOW TABLES;
+SELECT id, name, email, created_at FROM users ORDER BY id DESC;
+SELECT id, user_id, movie_id, created_at FROM favorites ORDER BY id DESC;
+```
+
+If rows appear in users and favorites, persistence is working correctly.
+
+## Troubleshooting
+
+- Port already in use:
+	Change PORT in Backend/.env and update REACT_APP_BACKEND_URL in Frontend/.env.
+- TMDB requests fail:
+	Verify TMDB_API_KEY and REACT_APP_TMDB_API_KEY are valid.
+- Cannot access profile/favorites:
+	Ensure user is logged in and token exists in local storage.
+
+## Demo
+
+Demo video: https://drive.google.com/file/d/1bydNfWhQvzscf07RgFR6wQSjOf6FJIKP/view?usp=drive_link
+
+## License
+
 This project is licensed under the MIT License.
 
----
+## Author
 
-## 👨‍💻 Author
-Name - [ShreeKumbhar](https://github.com/ShreeKumbhar)
+Shree Kumbhar
+- GitHub: https://github.com/ShreeKumbhar
 

@@ -14,7 +14,7 @@ router.get("/profile", authenticateUser, async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const movieDetailsPromises = user.favorites.map((movieId) =>
+    const movieDetailsPromises = (user.favorites || []).map((movieId) =>
       axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`)
     );
 

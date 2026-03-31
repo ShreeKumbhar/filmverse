@@ -54,7 +54,7 @@ router.get("/user", authenticateUser, async (req, res) => {
             name: user.name,
             email: user.email,
             favorites: user.favorites,
-            favoriteMovies: favoriteMovies,
+            favoriteMovies,
         });
 
     } catch (error) {

@@ -7,16 +7,24 @@ const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    let user = await User.findOne({ email });
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "Name, email and password are required" });
+    }
+
+    const user = await User.findByEmail(email);
     if (user) {
       return res.status(400).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    user = new User({ name, email, password: hashedPassword });
+    const createdUser = await User.createUser({ name, email, password: hashedPassword });
+    const token = jwt.sign({ id: createdUser.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-    await user.save();
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({
+      message: "User registered successfully",
+      token,
+      user: createdUser,
+    });
   } catch (error) {
     console.error("Signup Error:", error);
     res.status(500).json({ message: "Server error" });
@@ -27,15 +35,20 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
+
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required" });
+    }
+
+    const user = await User.findByEmail(email);
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-    res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
+    res.json({ token, user: { id: user.id, name: user.name, email: user.email } });
   } catch (error) {
     console.error("Login Error:", error);
     res.status(500).json({ message: "Server error" });
@@ -45,23 +58,21 @@ const login = async (req, res) => {
 //Update Favorite Movies (Fixed)
 const updateFavorites = async (req, res) => {
   try {
-    const { movieId } = req.body;  
-    const userId = req.user.id;  
+    const { movieId } = req.body;
+    const userId = req.user.id;
+
+    if (!movieId) {
+      return res.status(400).json({ message: "Movie ID is required" });
+    }
 
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Toggle favorite movie
-    if (user.favorites.includes(movieId)) {
-      user.favorites = user.favorites.filter(id => id !== movieId);
-    } else {
-      user.favorites.push(movieId);
-    }
+    const favorites = await User.toggleFavorite(userId, String(movieId));
 
-    await user.save();
-    res.json({ message: "Favorites updated", favorites: user.favorites });
+    res.json({ message: "Favorites updated", favorites });
   } catch (error) {
     console.error("Favorites Update Error:", error);
     res.status(500).json({ message: "Server error" });
@@ -72,16 +83,19 @@ const updateFavorites = async (req, res) => {
 const resetPassword = async (req, res) => {
   try {
     const { email, newPassword } = req.body;
-    const user = await User.findOne({ email });
+
+    if (!email || !newPassword) {
+      return res.status(400).json({ message: "Email and new password are required" });
+    }
+
+    const user = await User.findByEmail(email);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedPassword;
-
-    await user.save();
+    await User.updatePassword(email, hashedPassword);
     res.json({ message: "Password reset successfully" });
   } catch (error) {
     console.error("Password Reset Error:", error);
