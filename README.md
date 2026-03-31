@@ -228,7 +228,6 @@ REACT_APP_TMDB_API_KEY=your_tmdb_api_key
 REACT_APP_BACKEND_URL=http://localhost:5001
 ```
 
-> ⚠️ Never commit `.env` files to version control. They are already listed in `.gitignore`.
 
 ---
 
