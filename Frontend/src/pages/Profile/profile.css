@@ -132,6 +132,33 @@
     font-size: 0.84rem;
 }
 
+.remove-favorite-button {
+    margin-top: auto;
+    border: 1px solid rgba(255, 115, 115, 0.55);
+    background: rgba(255, 95, 95, 0.18);
+    color: #ffd7d7;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+}
+
+.remove-favorite-button:hover {
+    background: rgba(255, 95, 95, 0.28);
+    border-color: rgba(255, 145, 145, 0.75);
+}
+
+.remove-favorite-button:active {
+    transform: translateY(1px);
+}
+
+.remove-favorite-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
 .empty-state {
     margin: 20px 0;
     color: #bfd0e8;
