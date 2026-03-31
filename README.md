@@ -12,7 +12,7 @@
 [![TMDB](https://img.shields.io/badge/TMDB-API-01B4E4?style=for-the-badge&logo=themoviedatabase&logoColor=white)](https://www.themoviedatabase.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
  
-**[🌐 Live Demo](https://film-verse-ten.vercel.app)** · **[📹 Demo Video](https://drive.google.com/file/d/1bydNfWhQvzscf07RgFR6wQSjOf6FJIKP/view)** · **[🐛 Report Bug](https://github.com/ShreeKumbhar/filmverse/issues)** · **[✨ Request Feature](https://github.com/ShreeKumbhar/filmverse/issues)**
+**[🌐 Live Demo](https://film-verse-ten.vercel.app)** · **[🐛 Report Bug](https://github.com/ShreeKumbhar/filmverse/issues)** · **[✨ Request Feature](https://github.com/ShreeKumbhar/filmverse/issues)**
  
 </div>
  
