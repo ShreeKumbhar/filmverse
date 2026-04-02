@@ -8,7 +8,7 @@ import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <MainContent />
     </Router>
   );

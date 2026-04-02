@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./movie.css";
-const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5001";
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
 
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./profile.css";
 
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
-const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5001";
+const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
 
 
